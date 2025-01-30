@@ -14,7 +14,8 @@ client = discord.Client(intents=discord.Intents.all())
 
 @client.event
 async def on_ready():
-  print("I'm in")
+  message = "daddys home"
+  print(message.capitalize)
   print(client.user)
 
 @client.event

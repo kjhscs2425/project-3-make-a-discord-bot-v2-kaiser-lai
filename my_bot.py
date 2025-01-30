@@ -8,20 +8,24 @@ This function will be called every time anyone says anything on a channel where 
 * You can have the bot respond differently to different users
 """
 def should_i_respond(user_message, user_name):
-  if "robot" in user_message:
+  if user_message == "can you speak mandarin?":
     return True
-  else:
+  else: 
     return False
+                
+#**Do NOT change the name of this function.**
 
-"""
-**Do NOT change the name of this function.**
+#"This function will be called every time the `should_i_respond` function returns `True`.
 
-This function will be called every time the `should_i_respond` function returns `True`.
+#* This function returns a string.
+#* The bot will post the returned string on the channel where the original message was sent.
+#* You can have the bot respond differently to different messages and users
 
-* This function returns a string.
-* The bot will post the returned string on the channel where the original message was sent.
-* You can have the bot respond differently to different messages and users
-"""
 def respond(user_message, user_name):
-  return f"""you said my name!!
+  return f""" no... ingles por favor
   {user_message.replace("robot", user_name)}"""
+
+
+  
+
+  
