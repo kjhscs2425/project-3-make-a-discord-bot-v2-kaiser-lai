@@ -13,9 +13,9 @@ def should_i_respond(user_message, user_name):
 #* This function returns a string.
 #* The bot will post the returned string on the channel where the original message was sent.
 #* You can have the bot respond differently to different messages and users
-
+pass_count = 0
 def respond(user_message, user_name):
-  global state, cylinder
+  global state, cylinder,pass_count
   if "do you speak mandarin" in user_message:
     return f""" no... ingles por favor
   {user_message.replace("robot", user_name)}"""
@@ -27,35 +27,95 @@ def respond(user_message, user_name):
   
   
   if "russian" in user_message:
-        state = "start"
-        return "Let's play, shall we... casual or deathwish? "
+        while True:
+          
+          state = "start"
+          return "Let's play, shall we... casual or deathwish? "
 
+  
   if state == "start":
         if user_message == "deathwish":
-            state = "deathwish"
-            cylinder = ["click"] * 4 + ["boom"] * 2
-            random.shuffle(cylinder)
-            return "2 bullets loaded, press e to start"
+              state = "deathwish"
+              cylinder = ["click"] * 4 + ["boom"] * 2
+              random.shuffle(cylinder)
+              return "2 bullets loaded, press e to start or f to pass to bot"
+          
 
   if state == "deathwish":
-        if user_message == "e":
-            if not cylinder:
-                cylinder = ["click"] * 4 + ["boom"] * 2
-                random.shuffle(cylinder)
-                return "Reloading... press e to continue"
+          if user_message == "e":
+              if not cylinder:
+                  cylinder = ["click"] * 4 + ["boom"] * 2
+                  random.shuffle(cylinder)
+                  return "Reloading... press e to continue or f to pass to bot"
 
-            trigger = cylinder.pop()
-            if trigger == "boom":
-                state = "not russian"
-                return "game over"
-            else:
-                return "Click! You're still alive. Press enter to pull the trigger again."
-            
-        if "i like dogs" in user_message:
-          return "I eat them"
+              trigger = cylinder.pop()
+              if trigger == "boom":
+                  state = "not russian"
+                  return "game over u die stoopid"
+              else:
+                  return "Click! You're still alive. Press e to pull the trigger again or f to pass to bot."
+          
+          if user_message == "f":
+              pass_count += 1 
+              if pass_count >= 3:
+                return "too many passes"
+              if not cylinder:
+                  return "plz reload"
+        
+        
+          bot_shots = random.randint(1,2)
+          for i in range(bot_shots):
+                bot_trigger = cylinder.pop()
+                if bot_trigger == "boom":
+                  state = "not russian"
+                  return "u win"
+          
+          return f"bot shot itself {bot_shots} times Click! bot still alive."
+             
+  if state == "start":
+          if user_message == "casual":
+              state = "casual"
+              cylinder = ["click"] * 5 + ["boom"] * 1
+              random.shuffle(cylinder)
+              return "1 bullets loaded, press e to start or f to pass to bot"
+          
 
-        if "potato" in user_message:
-          return "potato"
+  if state == "casual":
+          if user_message == "e":
+              if not cylinder:
+                  cylinder = ["click"] * 5 + ["boom"] * 1
+                  random.shuffle(cylinder)
+                  return "Reloading... press e to continue or f to pass to bot"
+
+              trigger = cylinder.pop()
+              if trigger == "boom":
+                  state = "not russian"
+                  return "game over u die stoopid"
+              else:
+                  return "Click! You're still alive. Press e to pull the trigger again or f to pass to bot."
+          
+          if user_message == "f":
+              pass_count += 1 
+              if pass_count >= 3:
+                return "too many passes"
+              if not cylinder:
+                  return "plz reload"
+        
+        
+          bot_shots = random.randint(1,2)
+          for i in range(bot_shots):
+                bot_trigger = cylinder.pop()
+                if bot_trigger == "boom":
+                  state = "not russian"
+                  return "u win"
+          
+          return f"bot shot itself {bot_shots} times Click! bot still alive."
+     
+  if "i like dogs" in user_message:
+      return "I eat them"
+
+  if "potato" in user_message:
+      return "potato"
   if "who is your daddy"in user_message:
     return "my creator is kaiser my father"
   if "favorite color"in user_message:
